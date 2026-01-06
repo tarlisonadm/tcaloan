@@ -9,7 +9,9 @@ import { findOrCreate } from '../services/googleSheet.js';
 passport.use(new GoogleStrategy({
     clientID: config.clientId as string,
     clientSecret: config.clientSecret as string,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "/auth/google/callback",
+    passReqToCallback: true,
+    proxy: true,
 },
    async (accessToken, refreshToken, profile, done) => {
         // Aqui você buscaria ou criaria o usuário no seu banco de dados
