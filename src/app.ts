@@ -13,7 +13,8 @@ app.set('views', 'src/views/pages');
 app.set('trust proxy', 1); // Confia no primeiro proxy (Render)
 
 // Middleware de sessão (Obrigatório para o Passport)
-app.use(session({ secret: 'secret_key', resave: false, saveUninitialized: true }));
+app.use(express.static('public'));
+app.use(session({ secret: config.sessionSecret as string, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
