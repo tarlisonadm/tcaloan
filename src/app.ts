@@ -3,6 +3,7 @@ import passport from 'passport';
 import session from 'express-session';
 import './utils/passportUtil.js'; // Importa a config
 import router from './routes/authRoutes.js';
+import config from './config/index.js';
 
 const app = express();
 
@@ -17,4 +18,4 @@ app.use(passport.session());
 
 app.use(router);
 
-app.listen(3000, () => console.log('Servidor rodando em http://localhost:3000'));
+app.listen(config.port, () => console.log('Server run'));
