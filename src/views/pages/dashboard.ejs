@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+
+<style>
+    :root{
+        --bg-1: #0f172a;
+        --bg-2: #0b2545;
+        --card: #ffffff;
+        --muted: #6b7280;
+        --accent: #1e90ff;
+        --glass: rgba(255,255,255,0.06);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#0b1220}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1100px;margin:20px auto;background:transparent}
+    .logo h1{font-size:1.4rem;color:#fff;letter-spacing:1px}
+    .logo p{font-size:0.9rem;color:var(--muted);margin-top:4px}
+
+    .picture{display:flex;align-items:center;gap:12px}
+    .picture img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.12);box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+
+    main{max-width:1100px;margin:12px auto;padding:20px}
+    section{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));padding:18px;border-radius:12px;backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;background:transparent;color:#fff}
+    thead th{background:linear-gradient(90deg,var(--accent),#4aa3ff);color:#fff;padding:12px 14px;text-align:center;font-weight:600;font-size:0.95rem}
+    tbody td{padding:12px 14px;text-align:left;border-top:1px solid rgba(255,255,255,0.06);font-size:0.95rem}
+    tbody tr:nth-child(even){background:rgba(255,255,255,0.02)}
+    tbody tr:hover{background:rgba(255,255,255,0.03);transform:translateZ(0)}
+
+    /* small screens */
+    @media (max-width:720px){
+        header{padding:12px}
+        .logo h1{font-size:1.1rem}
+        .picture img{width:40px;height:40px}
+        thead th, tbody td{padding:10px 8px}
+        main{padding:12px}
+    }
+</style>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <h1>TCA</h1>
+            <p>Emprestimo</p>
+        </div>
+
+        <% if(user) {%>
+            <div class="picture">
+                <img src="<%= user.picture %>" alt="">
+            </div>
+        <%}%>
+
+    </header>
+
+    <hr>
+
+    <main>
+        <section>
+
+            <% if(loans) {%>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Montante</th>
+                            <th>Parc.</th>
+                            <th>V. parc. pg</th>
+                            <th>Parc. pg</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <% loans.forEach(item=> { %>
+
+                            <tr>
+                                <td>
+                                    <%= item.applicant %>
+                                </td>
+                                 <td>
+                                    <%= item.amount %>
+                                </td>
+                                 <td>
+                                    <%= item.installments %>
+                                </td>
+                                <td>
+                                    <%= item.amount_paid %>
+                                </td>
+                                <td>
+                                    <%= item.installments_paid %>
+                                </td>
+                            </tr>
+
+                        <% }) %>
+
+                    </tbody>
+                </table>
+
+            <%}%>
+
+        </section>
+
+        <p style="color: #6b7280; margin-top: 20px;">Me paga veaco!</p>
+    </main>
+
+</body>
+
+</html>
