@@ -10,25 +10,26 @@ passport.use(new GoogleStrategy({
     clientID: config.clientId as string,
     clientSecret: config.clientSecret as string,
     callbackURL: "/auth/google/callback",
-    passReqToCallback: true,
     proxy: true,
+    //passReqToCallback: true,
+
 },
-   async (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
         // Aqui você buscaria ou criaria o usuário no seu banco de dados
         // Exemplo: const user = await User.findOrCreate({ googleId: profile.id })
 
         const user: UserGoogle = {
             id: randomUUID(),
-            name: profile.displayName,
-            email: profile.email,
-            picture: profile.picture,
+            name: await profile.displayName,
+            email: await profile.email,
+            picture: await profile.picture,
             type: 'user',
             create_at: new Date().toLocaleDateString("pt-BR").toString(),
         };
 
         const auth = await findOrCreate('users', user.email, user);
 
-        if(auth) done(null, user);
+        if (auth) done(null, user);
 
         return done(null, user);
     }
