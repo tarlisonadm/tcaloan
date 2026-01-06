@@ -18,4 +18,10 @@ app.use(passport.session());
 
 app.use(router);
 
-app.listen(config.port, () => console.log('Server run'));
+export default ({
+    run: () => {
+        app.listen(config.port, () => {
+            console.log(`Servidor rodando na porta ${config.port}`);
+        });
+    }
+})
